@@ -302,11 +302,11 @@
     </div>
 
     <script>
-        // Données temporaires (normalement stockées côté serveur)
+        // Données temporaires (normalement stockées côté serveur pour le moment)
         let activeSessions = JSON.parse(localStorage.getItem('activeSessions') || '{}');
         let usedCodes = JSON.parse(localStorage.getItem('usedCodes') || '[]');
         
-        // Questions du QCM
+        
         const questions = [
             {
                 question: "Chaque individu a le droit à un traitement correct. Que doit-on obtenir pour toute acte de torture ?",
@@ -410,7 +410,7 @@
             }
         ];
 
-        // Gestion de l'accès au QCM
+        
         document.getElementById('startQCM').addEventListener('click', function() {
             const code = document.getElementById('sessionCode').value.trim().toUpperCase();
             const errorDiv = document.getElementById('errorMessage');
@@ -430,11 +430,11 @@
                 return;
             }
             
-            // Marquer le code comme utilisé
+            
             usedCodes.push(code);
             localStorage.setItem('usedCodes', JSON.stringify(usedCodes));
             
-            // Supprimer la session active
+            
             delete activeSessions[code];
             localStorage.setItem('activeSessions', JSON.stringify(activeSessions));
             
@@ -773,7 +773,7 @@
                     </style>
                 `;
                 
-                // Sauvegarder le résultat dans localStorage
+                
                 const result = {
                     date: new Date().toISOString(),
                     score: score,
@@ -790,7 +790,7 @@
             loadQuestion();
         }
 
-        // Accès administrateur
+        
         document.getElementById('adminAccess').addEventListener('click', function(e) {
             e.preventDefault();
             
@@ -957,7 +957,7 @@
         }
 
         function updateAdminPanel() {
-            // Mise à jour des sessions actives
+            
             const activeSessionsDiv = document.getElementById('activeSessions');
             if (activeSessionsDiv) {
                 const sessionKeys = Object.keys(activeSessions);
@@ -970,7 +970,7 @@
                 }
             }
             
-            // Mise à jour des codes utilisés
+            
             const usedCodesDiv = document.getElementById('usedCodesList');
             if (usedCodesDiv) {
                 if (usedCodes.length === 0) {
@@ -982,7 +982,7 @@
                 }
             }
             
-            // Mise à jour des résultats récents
+            
             const resultsDiv = document.getElementById('recentResults');
             if (resultsDiv) {
                 const results = JSON.parse(localStorage.getItem('qcmResults') || '[]');
