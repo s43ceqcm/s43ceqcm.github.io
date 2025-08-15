@@ -1,0 +1,1016 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comité d'Éthique - Fondation SCP</title>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Source Code Pro', monospace;
+            background: linear-gradient(135deg, #0d0d0d 0%, #1a1a1a 50%, #2d0000 100%);
+            color: #e6e6e6;
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 20%, rgba(255, 0, 0, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(255, 0, 0, 0.05) 0%, transparent 50%),
+                linear-gradient(90deg, transparent 79px, rgba(255, 0, 0, 0.03) 81px, rgba(255, 0, 0, 0.03) 82px, transparent 84px);
+            z-index: -1;
+        }
+
+        .header {
+            text-align: center;
+            padding: 2rem 0;
+            border-bottom: 2px solid #ff0000;
+            margin-bottom: 3rem;
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+        }
+
+        .scp-logo {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 1rem;
+            background: #ff0000;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: white;
+            border: 3px solid #ffffff;
+            box-shadow: 0 0 20px rgba(255, 0, 0, 0.5);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #ffffff;
+            text-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+            margin-bottom: 0.5rem;
+            letter-spacing: 2px;
+        }
+
+        .subtitle {
+            font-size: 1.1rem;
+            color: #cccccc;
+            opacity: 0.8;
+            font-weight: 400;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .main-card {
+            background: rgba(13, 13, 13, 0.9);
+            border: 2px solid #ff0000;
+            border-radius: 15px;
+            padding: 3rem;
+            box-shadow: 
+                0 10px 30px rgba(0, 0, 0, 0.5),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1),
+                0 0 50px rgba(255, 0, 0, 0.2);
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .main-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #ff0000, transparent);
+            animation: scan 3s linear infinite;
+        }
+
+        @keyframes scan {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        .access-title {
+            font-size: 1.8rem;
+            font-weight: 600;
+            text-align: center;
+            margin-bottom: 2rem;
+            color: #ff4444;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .input-group {
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .input-label {
+            display: block;
+            font-size: 1rem;
+            font-weight: 600;
+            color: #cccccc;
+            margin-bottom: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .code-input {
+            width: 100%;
+            padding: 1.2rem;
+            font-family: 'Source Code Pro', monospace;
+            font-size: 1.1rem;
+            background: rgba(0, 0, 0, 0.7);
+            border: 2px solid #444444;
+            border-radius: 8px;
+            color: #ffffff;
+            transition: all 0.3s ease;
+            letter-spacing: 2px;
+        }
+
+        .code-input:focus {
+            outline: none;
+            border-color: #ff0000;
+            box-shadow: 0 0 15px rgba(255, 0, 0, 0.3);
+            background: rgba(0, 0, 0, 0.9);
+        }
+
+        .start-button {
+            width: 100%;
+            padding: 1.5rem;
+            font-family: 'Source Code Pro', monospace;
+            font-size: 1.2rem;
+            font-weight: 600;
+            background: linear-gradient(45deg, #ff0000, #cc0000);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .start-button:hover {
+            background: linear-gradient(45deg, #ff3333, #ff0000);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(255, 0, 0, 0.4);
+        }
+
+        .start-button:active {
+            transform: translateY(0);
+        }
+
+        .start-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .start-button:hover::before {
+            left: 100%;
+        }
+
+        .admin-link {
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid #333333;
+        }
+
+        .admin-link a {
+            color: #666666;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+        }
+
+        .admin-link a:hover {
+            color: #ff0000;
+        }
+
+        .error-message {
+            background: rgba(255, 0, 0, 0.1);
+            border: 1px solid #ff0000;
+            color: #ff6666;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-top: 1rem;
+            text-align: center;
+            font-weight: 600;
+            display: none;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 1rem;
+            }
+            
+            .main-card {
+                padding: 2rem;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .access-title {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+=======
+
+<<<<<<< SEARCH
+<body>
+    <div class="container">
+        <h1>Comité d'Éthique de la Fondation SCP</h1>
+        <div class="qcm-section">
+            <h2>Accéder au QCM</h2>
+            <input type="text" id="sessionCode" placeholder="Entrez le code de session">
+            <button id="startQCM">Commencer le QCM</button>
+        </div>
+        <div id="result" class="hidden"></div>
+    </div>
+    <script src="script.js"></script>
+</body>
+=======
+<body>
+    <div class="header">
+        <div class="scp-logo">SCP</div>
+        <h1>Comité d'Éthique</h1>
+        <div class="subtitle">FONDATION SCP - DÉLÉGATION LOCALE IRC N°43</div>
+    </div>
+
+    <div class="container">
+        <div class="main-card">
+            <h2 class="access-title">Accès au QCM d'Éthique</h2>
+            
+            <div class="input-group">
+                <label class="input-label" for="sessionCode">Code de Session</label>
+                <input type="text" id="sessionCode" class="code-input" placeholder="Entrez votre code de session..." maxlength="10">
+            </div>
+            
+            <button id="startQCM" class="start-button">
+                Commencer le QCM
+            </button>
+            
+            <div id="errorMessage" class="error-message">
+                Code de session invalide ou expiré
+            </div>
+            
+            <div class="admin-link">
+                <a href="#" id="adminAccess">Accès Administrateur</a>
+            </div>
+        </div>
+        
+        <div id="result" class="hidden"></div>
+    </div>
+
+    <script>
+        // Données temporaires (normalement stockées côté serveur)
+        let activeSessions = JSON.parse(localStorage.getItem('activeSessions') || '{}');
+        let usedCodes = JSON.parse(localStorage.getItem('usedCodes') || '[]');
+        
+        // Questions du QCM
+        const questions = [
+            {
+                question: "Chaque individu a le droit à un traitement correct. Que doit-on obtenir pour toute acte de torture ?",
+                options: ["Une autorisation du comité", "Une approbation du personnel de Classe-D", "Aucune autorisation n'est nécessaire"],
+                correct: 0
+            },
+            {
+                question: "Quel est le droit d'un individu concernant son opinion ?",
+                options: ["S'exprimer librement sans aucune restriction", "S'exprimer librement tant que cela ne nuit pas à autrui", "Ne pas s'exprimer du tout"],
+                correct: 1
+            },
+            {
+                question: "Le Comité d'Éthique s'engage à faire valoir quels droits ?",
+                options: ["Les droits des animaux", "Les droits de l'homme et du citoyen", "Les droits des employés uniquement"],
+                correct: 1
+            },
+            {
+                question: "Que se passe-t-il en cas de dégradation ou de destruction d'une anomalie sans autorisation ?",
+                options: ["Aucune sanction", "Licenciement ou peine de mort", "Avertissement verbal"],
+                correct: 1
+            },
+            {
+                question: "Les menaces visant à nuire à un individu sont :",
+                options: ["Acceptables si elles sont justifiées", "Prohibées et peuvent entraîner des sanctions", "Permises dans certaines circonstances"],
+                correct: 1
+            },
+            {
+                question: "Quel type d'environnement de travail la Fondation SCP garantit-elle ?",
+                options: ["Un environnement compétitif", "Un environnement sain et sans discriminations", "Un environnement strictement surveillé"],
+                correct: 1
+            },
+            {
+                question: "Que doit faire le personnel pour garantir la sécurité de l'installation ?",
+                options: ["Ignorer les comportements dangereux", "Mettre en danger le personnel pour des expériences", "Ne pas mettre en danger le personnel ou l'installation"],
+                correct: 2
+            },
+            {
+                question: "Qui peut administrer un amnésique de classe -B ou -C ?",
+                options: ["Tout membre du personnel", "Seul le département médical ou des personnes agréées", "N'importe quel scientifique"],
+                correct: 1
+            },
+            {
+                question: "Comment le personnel de la Fondation doit-il traiter le personnel de Classe-D ?",
+                options: ["Avec mépris", "Avec respect et décence", "Avec indifférence"],
+                correct: 1
+            },
+            {
+                question: "Dans quel cas un membre du personnel peut-il exiger l'interruption d'une expérience ?",
+                options: ["En cas de violation éthique ou danger imminent", "Pour des raisons personnelles", "Pour des raisons de confort"],
+                correct: 0
+            },
+            {
+                question: "Que signifie la règle des 3R pour le personnel scientifique ?",
+                options: ["Réduire, Remplacer, Raffiner", "Réaliser, Répéter, Réviser", "Réfléchir, Réagir, Réussir"],
+                correct: 0
+            },
+            {
+                question: "L'utilisation des armes de service est prohibée sauf en cas de :",
+                options: ["Légitime défense", "Conflit personnel", "Expérimentation"],
+                correct: 0
+            },
+            {
+                question: "Le personnel a l'obligation d'aider les autres membres en danger, sauf si :",
+                options: ["Ils sont en pause", "Ils reçoivent un ordre légitime contraire", "Ils ne connaissent pas la situation"],
+                correct: 1
+            },
+            {
+                question: "Que doit faire le personnel de sécurité en cas de comportement non éthique d'un scientifique ?",
+                options: ["Ignorer la situation", "Intervenir et prévenir le Comité d'Éthique", "Prendre des mesures disciplinaires immédiatement"],
+                correct: 1
+            },
+            {
+                question: "Quel acte est lourdement sanctionné par la Fondation ?",
+                options: ["La désobéissance", "Le sadisme et la cruauté", "L'inefficacité au travail"],
+                correct: 1
+            },
+            {
+                question: "Les soins médicaux doivent être fournis sans tenir compte de :",
+                options: ["L'âge du patient", "Son genre, ethnie, croyance, etc.", "Son statut au sein de la Fondation"],
+                correct: 1
+            },
+            {
+                question: "Quel type de drogues est interdit d'utilisation ?",
+                options: ["Les drogues nécessaires aux applications médicales", "Les drogues répertoriées comme non nécessaires", "Les drogues utilisées pour le bien-être"],
+                correct: 1
+            },
+            {
+                question: "Que se passe-t-il si un membre du personnel interrompt les devoirs du Comité d'Éthique ?",
+                options: ["Rien, c'est acceptable", "Sanctions graves", "Un simple avertissement"],
+                correct: 1
+            },
+            {
+                question: "Les salles d'opération doivent être :",
+                options: ["Vérifiées pour leur stérilité", "Utilisées sans vérification", "Ouvertes à tous les membres du personnel"],
+                correct: 0
+            },
+            {
+                question: "Quel est l'objectif principal du QCM d'éthique proposé ?",
+                options: ["Évaluer les compétences techniques", "Vérifier la compréhension et l'adhésion aux règles éthiques", "Renforcer la hiérarchie au sein de la Fondation"],
+                correct: 1
+            }
+        ];
+
+        // Gestion de l'accès au QCM
+        document.getElementById('startQCM').addEventListener('click', function() {
+            const code = document.getElementById('sessionCode').value.trim().toUpperCase();
+            const errorDiv = document.getElementById('errorMessage');
+            
+            if (!code) {
+                showError('Veuillez entrer un code de session');
+                return;
+            }
+            
+            if (usedCodes.includes(code)) {
+                showError('Ce code a déjà été utilisé');
+                return;
+            }
+            
+            if (!activeSessions[code]) {
+                showError('Code de session invalide ou expiré');
+                return;
+            }
+            
+            // Marquer le code comme utilisé
+            usedCodes.push(code);
+            localStorage.setItem('usedCodes', JSON.stringify(usedCodes));
+            
+            // Supprimer la session active
+            delete activeSessions[code];
+            localStorage.setItem('activeSessions', JSON.stringify(activeSessions));
+            
+            startQuiz();
+        });
+
+        function showError(message) {
+            const errorDiv = document.getElementById('errorMessage');
+            errorDiv.textContent = message;
+            errorDiv.style.display = 'block';
+            setTimeout(() => {
+                errorDiv.style.display = 'none';
+            }, 5000);
+        }
+
+        function startQuiz() {
+            document.querySelector('.container').innerHTML = `
+                <div class="quiz-container">
+                    <div class="quiz-header">
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="progressFill"></div>
+                        </div>
+                        <div class="question-counter">
+                            Question <span id="currentQuestion">1</span> sur ${questions.length}
+                        </div>
+                    </div>
+                    
+                    <div class="question-card">
+                        <h3 id="questionText" class="question-text"></h3>
+                        <div id="optionsContainer" class="options-container"></div>
+                        <button id="nextButton" class="next-button" disabled>Suivant</button>
+                    </div>
+                </div>
+                
+                <style>
+                    .quiz-container {
+                        max-width: 900px;
+                        margin: 0 auto;
+                    }
+                    
+                    .quiz-header {
+                        background: rgba(13, 13, 13, 0.9);
+                        border: 2px solid #ff0000;
+                        border-radius: 10px;
+                        padding: 1.5rem;
+                        margin-bottom: 2rem;
+                        text-align: center;
+                    }
+                    
+                    .progress-bar {
+                        width: 100%;
+                        height: 8px;
+                        background: rgba(255, 255, 255, 0.1);
+                        border-radius: 4px;
+                        margin-bottom: 1rem;
+                        overflow: hidden;
+                    }
+                    
+                    .progress-fill {
+                        height: 100%;
+                        background: linear-gradient(90deg, #ff0000, #ff3333);
+                        width: 0%;
+                        transition: width 0.3s ease;
+                    }
+                    
+                    .question-counter {
+                        font-size: 1.1rem;
+                        font-weight: 600;
+                        color: #cccccc;
+                    }
+                    
+                    .question-card {
+                        background: rgba(13, 13, 13, 0.9);
+                        border: 2px solid #ff0000;
+                        border-radius: 15px;
+                        padding: 3rem;
+                        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+                    }
+                    
+                    .question-text {
+                        font-size: 1.3rem;
+                        line-height: 1.6;
+                        margin-bottom: 2rem;
+                        color: #ffffff;
+                        text-align: center;
+                    }
+                    
+                    .options-container {
+                        margin-bottom: 2rem;
+                    }
+                    
+                    .option {
+                        background: rgba(0, 0, 0, 0.5);
+                        border: 2px solid #444444;
+                        border-radius: 10px;
+                        padding: 1.2rem;
+                        margin-bottom: 1rem;
+                        cursor: pointer;
+                        transition: all 0.3s ease;
+                        font-size: 1rem;
+                        color: #ffffff;
+                    }
+                    
+                    .option:hover {
+                        border-color: #ff0000;
+                        background: rgba(255, 0, 0, 0.1);
+                        transform: translateX(5px);
+                    }
+                    
+                    .option.selected {
+                        border-color: #ff0000;
+                        background: rgba(255, 0, 0, 0.2);
+                        box-shadow: 0 0 15px rgba(255, 0, 0, 0.3);
+                    }
+                    
+                    .next-button {
+                        width: 100%;
+                        padding: 1.5rem;
+                        font-family: 'Source Code Pro', monospace;
+                        font-size: 1.2rem;
+                        font-weight: 600;
+                        background: linear-gradient(45deg, #ff0000, #cc0000);
+                        color: white;
+                        border: none;
+                        border-radius: 10px;
+                        cursor: pointer;
+                        transition: all 0.3s ease;
+                        text-transform: uppercase;
+                    }
+                    
+                    .next-button:disabled {
+                        background: #666666;
+                        cursor: not-allowed;
+                    }
+                    
+                    .next-button:not(:disabled):hover {
+                        background: linear-gradient(45deg, #ff3333, #ff0000);
+                        transform: translateY(-2px);
+                    }
+                </style>
+            `;
+            
+            let currentQuestionIndex = 0;
+            let userAnswers = [];
+            
+            function loadQuestion() {
+                const question = questions[currentQuestionIndex];
+                const progressPercent = ((currentQuestionIndex + 1) / questions.length) * 100;
+                
+                document.getElementById('progressFill').style.width = progressPercent + '%';
+                document.getElementById('currentQuestion').textContent = currentQuestionIndex + 1;
+                document.getElementById('questionText').textContent = question.question;
+                
+                const optionsContainer = document.getElementById('optionsContainer');
+                optionsContainer.innerHTML = '';
+                
+                question.options.forEach((option, index) => {
+                    const optionDiv = document.createElement('div');
+                    optionDiv.className = 'option';
+                    optionDiv.textContent = `${String.fromCharCode(65 + index)}. ${option}`;
+                    optionDiv.onclick = () => selectOption(index, optionDiv);
+                    optionsContainer.appendChild(optionDiv);
+                });
+                
+                document.getElementById('nextButton').disabled = true;
+            }
+            
+            function selectOption(index, element) {
+                document.querySelectorAll('.option').forEach(opt => opt.classList.remove('selected'));
+                element.classList.add('selected');
+                userAnswers[currentQuestionIndex] = index;
+                document.getElementById('nextButton').disabled = false;
+            }
+            
+            document.getElementById('nextButton').onclick = function() {
+                currentQuestionIndex++;
+                if (currentQuestionIndex < questions.length) {
+                    loadQuestion();
+                } else {
+                    showResults();
+                }
+            };
+            
+            function showResults() {
+                let score = 0;
+                userAnswers.forEach((answer, index) => {
+                    if (answer === questions[index].correct) {
+                        score++;
+                    }
+                });
+                
+                const passed = score >= 10;
+                const percentage = Math.round((score / questions.length) * 100);
+                
+                document.querySelector('.container').innerHTML = `
+                    <div class="results-card">
+                        <div class="results-header">
+                            <h2>Résultats du QCM d'Éthique</h2>
+                        </div>
+                        
+                        <div class="score-display ${passed ? 'passed' : 'failed'}">
+                            <div class="score-number">${score}/${questions.length}</div>
+                            <div class="score-percentage">${percentage}%</div>
+                            <div class="score-status">${passed ? 'RÉUSSI' : 'ÉCHEC'}</div>
+                        </div>
+                        
+                        <div class="results-details">
+                            <p><strong>Note minimale requise :</strong> 10/20 (50%)</p>
+                            <p><strong>Votre résultat :</strong> ${score}/20 (${percentage}%)</p>
+                            <p><strong>Statut :</strong> ${passed ? 'Validé - Vous avez réussi le QCM d\'éthique' : 'Non validé - Vous devez repasser le QCM'}</p>
+                        </div>
+                        
+                        ${passed ? 
+                            '<div class="success-message">Félicitations ! Votre compréhension de la charte éthique de la Fondation SCP est validée.</div>' :
+                            '<div class="failure-message">Votre score est insuffisant. Veuillez étudier à nouveau la charte éthique et repasser le QCM.</div>'
+                        }
+                        
+                        <button onclick="location.reload()" class="restart-button">Retour à l'accueil</button>
+                    </div>
+                    
+                    <style>
+                        .results-card {
+                            max-width: 700px;
+                            margin: 0 auto;
+                            background: rgba(13, 13, 13, 0.9);
+                            border: 2px solid #ff0000;
+                            border-radius: 15px;
+                            padding: 3rem;
+                            text-align: center;
+                            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+                        }
+                        
+                        .results-header h2 {
+                            color: #ffffff;
+                            font-size: 2rem;
+                            margin-bottom: 2rem;
+                            text-transform: uppercase;
+                        }
+                        
+                        .score-display {
+                            margin: 2rem 0;
+                            padding: 2rem;
+                            border-radius: 15px;
+                            border: 3px solid;
+                        }
+                        
+                        .score-display.passed {
+                            border-color: #00ff00;
+                            background: rgba(0, 255, 0, 0.1);
+                        }
+                        
+                        .score-display.failed {
+                            border-color: #ff0000;
+                            background: rgba(255, 0, 0, 0.1);
+                        }
+                        
+                        .score-number {
+                            font-size: 3rem;
+                            font-weight: 700;
+                            color: #ffffff;
+                        }
+                        
+                        .score-percentage {
+                            font-size: 1.5rem;
+                            color: #cccccc;
+                            margin: 0.5rem 0;
+                        }
+                        
+                        .score-status {
+                            font-size: 1.3rem;
+                            font-weight: 600;
+                            text-transform: uppercase;
+                            letter-spacing: 2px;
+                        }
+                        
+                        .passed .score-status {
+                            color: #00ff00;
+                        }
+                        
+                        .failed .score-status {
+                            color: #ff0000;
+                        }
+                        
+                        .results-details {
+                            background: rgba(0, 0, 0, 0.3);
+                            border-radius: 10px;
+                            padding: 1.5rem;
+                            margin: 2rem 0;
+                            text-align: left;
+                        }
+                        
+                        .results-details p {
+                            margin-bottom: 0.8rem;
+                            color: #cccccc;
+                        }
+                        
+                        .success-message {
+                            background: rgba(0, 255, 0, 0.1);
+                            border: 1px solid #00ff00;
+                            color: #66ff66;
+                            padding: 1.5rem;
+                            border-radius: 10px;
+                            margin: 2rem 0;
+                            font-weight: 600;
+                        }
+                        
+                        .failure-message {
+                            background: rgba(255, 0, 0, 0.1);
+                            border: 1px solid #ff0000;
+                            color: #ff6666;
+                            padding: 1.5rem;
+                            border-radius: 10px;
+                            margin: 2rem 0;
+                            font-weight: 600;
+                        }
+                        
+                        .restart-button {
+                            padding: 1.2rem 2rem;
+                            font-family: 'Source Code Pro', monospace;
+                            font-size: 1.1rem;
+                            font-weight: 600;
+                            background: linear-gradient(45deg, #ff0000, #cc0000);
+                            color: white;
+                            border: none;
+                            border-radius: 10px;
+                            cursor: pointer;
+                            transition: all 0.3s ease;
+                            text-transform: uppercase;
+                            margin-top: 2rem;
+                        }
+                        
+                        .restart-button:hover {
+                            background: linear-gradient(45deg, #ff3333, #ff0000);
+                            transform: translateY(-2px);
+                        }
+                    </style>
+                `;
+                
+                // Sauvegarder le résultat dans localStorage
+                const result = {
+                    date: new Date().toISOString(),
+                    score: score,
+                    total: questions.length,
+                    passed: passed,
+                    percentage: percentage
+                };
+                
+                let results = JSON.parse(localStorage.getItem('qcmResults') || '[]');
+                results.push(result);
+                localStorage.setItem('qcmResults', JSON.stringify(results));
+            }
+            
+            loadQuestion();
+        }
+
+        // Accès administrateur
+        document.getElementById('adminAccess').addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            const username = prompt('Nom d\'utilisateur :');
+            const password = prompt('Mot de passe :');
+            
+            if (username === 'IRC43DELCE' && password === 'Mwamwabisousmonbebe') {
+                showAdminPanel();
+            } else {
+                alert('Identifiants incorrects');
+            }
+        });
+
+        function showAdminPanel() {
+            document.querySelector('.container').innerHTML = `
+                <div class="admin-panel">
+                    <h2>Panel Administrateur - Comité d'Éthique</h2>
+                    
+                    <div class="admin-section">
+                        <h3>Créer une nouvelle session QCM</h3>
+                        <div class="session-form">
+                            <button id="generateCode" class="admin-button">Générer un nouveau code</button>
+                            <div id="generatedCode" class="generated-code"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="admin-section">
+                        <h3>Sessions actives</h3>
+                        <div id="activeSessions" class="sessions-list"></div>
+                    </div>
+                    
+                    <div class="admin-section">
+                        <h3>Codes utilisés</h3>
+                        <div id="usedCodesList" class="codes-list"></div>
+                    </div>
+                    
+                    <div class="admin-section">
+                        <h3>Résultats récents</h3>
+                        <div id="recentResults" class="results-list"></div>
+                    </div>
+                    
+                    <button onclick="location.reload()" class="admin-button back-button">Retour à l'accueil</button>
+                </div>
+                
+                <style>
+                    .admin-panel {
+                        max-width: 1000px;
+                        margin: 0 auto;
+                        background: rgba(13, 13, 13, 0.9);
+                        border: 2px solid #ff0000;
+                        border-radius: 15px;
+                        padding: 3rem;
+                        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+                    }
+                    
+                    .admin-panel h2 {
+                        color: #ffffff;
+                        text-align: center;
+                        margin-bottom: 3rem;
+                        font-size: 2rem;
+                        text-transform: uppercase;
+                    }
+                    
+                    .admin-section {
+                        background: rgba(0, 0, 0, 0.3);
+                        border-radius: 10px;
+                        padding: 2rem;
+                        margin-bottom: 2rem;
+                        border: 1px solid #444444;
+                    }
+                    
+                    .admin-section h3 {
+                        color: #ff4444;
+                        margin-bottom: 1.5rem;
+                        font-size: 1.3rem;
+                        text-transform: uppercase;
+                    }
+                    
+                    .admin-button {
+                        padding: 1rem 2rem;
+                        font-family: 'Source Code Pro', monospace;
+                        font-size: 1rem;
+                        font-weight: 600;
+                        background: linear-gradient(45deg, #ff0000, #cc0000);
+                        color: white;
+                        border: none;
+                        border-radius: 8px;
+                        cursor: pointer;
+                        transition: all 0.3s ease;
+                        text-transform: uppercase;
+                        margin-right: 1rem;
+                        margin-bottom: 1rem;
+                    }
+                    
+                    .admin-button:hover {
+                        background: linear-gradient(45deg, #ff3333, #ff0000);
+                        transform: translateY(-2px);
+                    }
+                    
+                    .generated-code {
+                        margin-top: 1rem;
+                        padding: 1rem;
+                        background: rgba(0, 255, 0, 0.1);
+                        border: 1px solid #00ff00;
+                        border-radius: 8px;
+                        color: #66ff66;
+                        font-family: 'Source Code Pro', monospace;
+                        font-size: 1.2rem;
+                        font-weight: 600;
+                        text-align: center;
+                        letter-spacing: 3px;
+                        display: none;
+                    }
+                    
+                    .sessions-list, .codes-list, .results-list {
+                        color: #cccccc;
+                        font-family: 'Source Code Pro', monospace;
+                    }
+                    
+                    .session-item, .code-item, .result-item {
+                        background: rgba(255, 255, 255, 0.05);
+                        padding: 1rem;
+                        margin-bottom: 0.5rem;
+                        border-radius: 5px;
+                        border-left: 3px solid #ff0000;
+                    }
+                    
+                    .back-button {
+                        background: linear-gradient(45deg, #666666, #444444);
+                        margin-top: 2rem;
+                    }
+                    
+                    .back-button:hover {
+                        background: linear-gradient(45deg, #888888, #666666);
+                    }
+                </style>
+            `;
+            
+            updateAdminPanel();
+            
+            document.getElementById('generateCode').addEventListener('click', function() {
+                const code = generateSessionCode();
+                activeSessions[code] = {
+                    created: new Date().toISOString(),
+                    used: false
+                };
+                localStorage.setItem('activeSessions', JSON.stringify(activeSessions));
+                
+                const codeDiv = document.getElementById('generatedCode');
+                codeDiv.textContent = `Code généré: ${code}`;
+                codeDiv.style.display = 'block';
+                
+                updateAdminPanel();
+            });
+        }
+
+        function generateSessionCode() {
+            const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+            let code = '';
+            for (let i = 0; i < 6; i++) {
+                code += chars.charAt(Math.floor(Math.random() * chars.length));
+            }
+            return code;
+        }
+
+        function updateAdminPanel() {
+            // Mise à jour des sessions actives
+            const activeSessionsDiv = document.getElementById('activeSessions');
+            if (activeSessionsDiv) {
+                const sessionKeys = Object.keys(activeSessions);
+                if (sessionKeys.length === 0) {
+                    activeSessionsDiv.innerHTML = '<p>Aucune session active</p>';
+                } else {
+                    activeSessionsDiv.innerHTML = sessionKeys.map(code => 
+                        `<div class="session-item">Code: ${code} - Créé le: ${new Date(activeSessions[code].created).toLocaleString()}</div>`
+                    ).join('');
+                }
+            }
+            
+            // Mise à jour des codes utilisés
+            const usedCodesDiv = document.getElementById('usedCodesList');
+            if (usedCodesDiv) {
+                if (usedCodes.length === 0) {
+                    usedCodesDiv.innerHTML = '<p>Aucun code utilisé</p>';
+                } else {
+                    usedCodesDiv.innerHTML = usedCodes.slice(-10).map(code => 
+                        `<div class="code-item">Code utilisé: ${code}</div>`
+                    ).join('');
+                }
+            }
+            
+            // Mise à jour des résultats récents
+            const resultsDiv = document.getElementById('recentResults');
+            if (resultsDiv) {
+                const results = JSON.parse(localStorage.getItem('qcmResults') || '[]');
+                if (results.length === 0) {
+                    resultsDiv.innerHTML = '<p>Aucun résultat enregistré</p>';
+                } else {
+                    resultsDiv.innerHTML = results.slice(-5).map(result => 
+                        `<div class="result-item">
+                            ${new Date(result.date).toLocaleString()} - 
+                            Score: ${result.score}/${result.total} (${result.percentage}%) - 
+                            ${result.passed ? 'RÉUSSI' : 'ÉCHEC'}
+                        </div>`
+                    ).join('');
+                }
+            }
+        }
+    </script>
+</body>
+<body>
+    <div class="container">
+        <h1>Comité d'Éthique de la Fondation SCP</h1>
+        <div class="qcm-section">
+            <h2>Accéder au QCM</h2>
+            <input type="text" id="sessionCode" placeholder="Entrez le code de session">
+            <button id="startQCM">Commencer le QCM</button>
+        </div>
+        <div id="result" class="hidden"></div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
