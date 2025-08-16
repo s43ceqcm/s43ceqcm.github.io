@@ -2,11 +2,13 @@
 session_start();
 
 
-if (!isset($_SESSION['activeSessions'])) {
-    $_SESSION['activeSessions'] = ['ABC123', 'XYZ789', 'M2PLO']; 
-}
-if (!isset($_SESSION['usedCodes'])) {
-    $_SESSION['usedCodes'] = [];
+if (!isset($_SESSION['codes'])) {
+    
+    $_SESSION['codes'] = [
+        'ABC123' => false, 
+        'XYZ789' => false,
+        'QWE456' => false
+    ];
 }
 
 
@@ -18,24 +20,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['sessionCode'])) {
         exit;
     }
 
-    if (in_array($code, $_SESSION['usedCodes'])) {
-        echo json_encode(['error' => 'Ce code a déjà été utilisé']);
+    if (!isset($_SESSION['codes'][$code])) {
+        echo json_encode(['error' => 'Code invalide']);
         exit;
     }
 
-    if (!in_array($code, $_SESSION['activeSessions'])) {
-        echo json_encode(['error' => 'Code invalide ou expiré']);
+    if ($_SESSION['codes'][$code] === true) {
+        echo json_encode(['error' => 'Code déjà utilisé']);
         exit;
     }
 
     
-    $_SESSION['usedCodes'][] = $code;
-    $_SESSION['activeSessions'] = array_diff($_SESSION['activeSessions'], [$code]);
+    $_SESSION['codes'][$code] = true;
 
     echo json_encode(['success' => true]);
     exit;
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
