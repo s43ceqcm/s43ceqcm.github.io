@@ -1,7 +1,4 @@
-   {
-       "codes": [
-           {"code": "DEMO01", "valid": true},
-           {"code": "TEST02", "valid": true}
-       ]
-   }
+{
+    "codes": []
+}
    
